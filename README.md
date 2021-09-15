@@ -38,5 +38,3 @@ Everyone should make an account on Github (https://github.com/). Then, follow th
 15. Run: `git remote set-url origin <new git URL>`
 16. Run: `git add -u`
 17. Run: `git push`
-
-### Installat
