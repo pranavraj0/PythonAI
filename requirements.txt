@@ -1,4 +1,0 @@
-transformers
-torch
-emoji
-packaging==20.0

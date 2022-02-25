@@ -1,40 +1,37 @@
-# Bootcamp-FA21
+# AIDA Bootcamp #3: Training a Model
 
-## Setup
+Today, we'll finally be training a model!
 
-Everyone should make an account on Github (https://github.com/). Then, follow the instructions for your OS.
+So far, we've looked at setting up a reliable environment to work in (week 1) and loaded a dataset of Tweets pandas and a tokenizer. We passed the tokenizer text.
 
-### Linux, Mac
-1. Most likely you already have git installed. If you don't, see https://git-scm.com/book/en/v2/Getting-Started-Installing-Git or ask Jatin.
-2. Open terminal.
-3. Run: `git config --global user.name "<Your name>"`
-4. Run: `git config --global user.email <Your email>`
-5. Run `cd Desktop`
-5. Run: `git clone https://github.com/AIDA-UIUC/Bootcamp-FA21.git`
-6. Download conda from https://www.anaconda.com/products/individual-d
-7. Run: `conda install -c pytorch pytorch`. Then run `pip install -r requirements.txt`.
-8. Run: `jupyter notebook`
-9. Execute the code in `setup_test.ipynb` and make sure it worked
-10. Create a new git repository on Github. You can do this from the website.
-11. Run: `git remote set-url origin <new git URL>`
-12. Run: `git add -u`
-13. Run: `git push`
+If you missed the previous sessions and/or don't fully understand what that means, that's ok. All you need to know for today is that we have a PyTorch dataset, which can fetch pairs of `(x, y)` datapoints, where `x` and `y` are `torch.Tensor` objects ([here](https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html)'s some info on what exactly a `torch.Tensor` is). This is all you need to train a model.
 
-### Windows
-1. Download git for windows from https://git-scm.com/downloads
-2. Open the git bash program
-3. Run: `git config --global user.name "<Your name>"`
-4. Run: `git config --global user.email <Your email>`
-5. Run: `cd Desktop && touch hi.txt`
-6. See if `hi.txt` exists in your Desktop. If you've never used terminal before, this shows that terminal is another interface to your computer. Until now you've probably used what is called a GUI (graphical user interface) like Chrome and Finder to do things. Terminal is a more expansive, text-based way to do things with your computer.
-7. Run: `git clone https://github.com/AIDA-UIUC/Bootcamp-FA21.git`
-8. Download conda from https://www.anaconda.com/products/individual-d
-9. Open the anaconda prompt program
-10. Run: `cd Desktop/Bootcamp-FA21`
-11. Run: `conda install -c pytorch pytorch`. Then run `pip install -r requirements.txt`.
-12. Run: `jupyter notebook`
-13. Execute the code in `setup_test.ipynb` and make sure it worked
-14. Create a new git repository on Github. You can do this from the website.
-15. Run: `git remote set-url origin <new git URL>`
-16. Run: `git add -u`
-17. Run: `git push`
+The setup is mostly the same as last week - clone your Git repo, create a conda environment, activate it, and launch a Jupyter notebook. This is common workflow for machine learning practitioners, so it's worthwile effort to get familiar with it and make sure it works on your computer.
+
+```bash
+git clone <Your GitHub Repo URL>
+cd <Your Git Repo>
+conda env create -f environment.yml
+conda activate model-training 
+jupyter lab
+```
+
+## Step 1: Train a Simple Multi-Layer Perceptron (TODO)
+
+To classify our Tweets, we'll be using a Multi-Layer Perceptron, or MLP for short. Despite the fancy-sounding name, it's one of the oldest and simplest kinds of neural networks used in machine learning. Due to their versatility, they are often used in some form in many neural But despite this, the MLP is used in some way as a component fo many machine learning models today, and is still alive and well in [modern research](https://arxiv.org/abs/2105.01601) today.
+
+We'll train our MLP to map the 768-dimensional vectors (which, again, are stored as `torch.Tensor` objects) into a vector of length 20, which represents the probability of each  
+
+To get you started, we've provided the correct code from last week along with some extra helper code for this week in `train_mlp.ipynb`. Your goal is to edit the code in this notebook where required to train the model which we've defined for you.
+
+> **Remember**, we don't expect you to know how to train an MLP already. Search engines and the people sitting next to you are your friends. This is not a class - we strongly encourage you to discuss, "cheat" by looking up the answers online and use every tool at your disposal to figure out how to effectively train your MLP in the simplest way possible.
+
+## Step 2: Train a Better Model (in Google Colab)
+
+If you were able to sucessfully complete the training code in `train_mlp.ipynb`, you might have noticed that the accuracy isn't actually that great.
+
+This is because we're using a very simple model with very simple training techniques. The model *trains*, but it does not train very well. In practice, machine learning practioners use a variety of techniques to make their models perform well on real datasets. This is a little beyond the scope of the bootcamp, but we've provided the code for you to run in `train_transformer.ipynb`. This trains a fancier type of model called a transformer to predict the exact same thing we did with MLPs, but more accurately.
+
+> **Note:** You probably need an Nvidia GPU to train this model. We reccomend using Google Colab this time, instead of your own environment. All you need to do is visit `https://colab.research.google.com/github/AIDA-UIUC/your-github-repo/blob/main/train_transformer.ipynb` (note that you have to use your own GitHub repo instead of `your-github-repo` in the URL).
+
+If you're interested in these sorts of training techniques and other topics on the bleeding edge of deep learning, definetly consider attending the SIGAIDA research meetings (see the `#research` channel on Discord for more info).
